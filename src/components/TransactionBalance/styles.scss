@@ -1,0 +1,10 @@
+@import "../../styles/variables";
+
+.transaction-balance {
+  &--negative {
+    color: $negative-color;
+  }
+  &--positive {
+    color: $positive-color;
+  }
+}
