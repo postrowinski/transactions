@@ -43,8 +43,12 @@ export const apiService: ApiService = {
   getSearchUrlParams(pageable: Pageable): string {
     let page: string = "";
     let limit: string = "_limit=20";
+    let sort: string = "";
     if (pageable.pageNumber) {
       page = `_page=${pageable.pageNumber}`;
+    }
+    if (pageable.sort) {
+      sort = `_sort=${pageable.sort.by}&_order=${pageable.sort.order}`;
     }
     const filters: string[] = [];
     if (pageable.filters) {
@@ -54,6 +58,6 @@ export const apiService: ApiService = {
         }
       }
     }
-    return _.join(_.compact([page, limit, ...filters]), "&");
+    return _.join(_.compact([page, limit, sort, ...filters]), "&");
   },
 };

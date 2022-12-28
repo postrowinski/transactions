@@ -8,7 +8,13 @@ export type Transaction = {
   description: string;
 };
 
+export type Sort = {
+  by: string;
+  order: "asc" | "desc";
+};
+
 export type Pageable = {
   pageNumber?: number;
+  sort?: Sort;
   filters?: Record<string, string>;
 };
