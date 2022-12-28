@@ -2,73 +2,102 @@ import { Button, Input, Form, Row, Col } from "antd";
 import { useFormik } from "formik";
 import React from "react";
 import { Transaction } from "../../types/types";
+import { FieldError } from "../FieldError/FIeldError";
+import { transactionFormValidationSchema } from "./validationSchema";
+import { format } from "date-fns";
 
 export const TransactionForm: React.FC = () => {
   const formik = useFormik<Transaction>({
+    validateOnChange: false,
+    validateOnBlur: false,
     initialValues: {
-      account: 0,
+      account: "",
       address: "",
       amount: 0,
       beneficiary: "",
       date: "",
       description: "",
     },
+    validationSchema: transactionFormValidationSchema,
     onSubmit: (values: Transaction) => {
-      console.log(values);
+      const submitValues: Transaction = {
+        ...values,
+        account: `PL${values.account}`,
+        date:
+          format(new Date(), "yyyy-MM-dd") +
+          "T" +
+          format(new Date(), "HH:mm:ss"),
+      };
+      console.log(submitValues);
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Form layout="vertical">
-        <Row gutter={12}>
-          <Col md={6} sm={12} xs={24}>
-            <Form.Item required label={"Amount"}>
-              <Input
-                name={"amount"}
-                type="number"
-                onChange={formik.handleChange}
-                placeholder="Amount"
-              />
-            </Form.Item>
-          </Col>
-          <Col md={6} sm={12} xs={24}>
-            <Form.Item required label={"Account"}>
-              <Input
-                name={"account"}
-                type="number"
-                onChange={formik.handleChange}
-                placeholder="account"
-              />
-            </Form.Item>
-          </Col>
-          <Col md={6} sm={12} xs={24}>
-            <Form.Item required label={"Beneficiary"}>
-              <Input
-                name={"beneficiary"}
-                onChange={formik.handleChange}
-                placeholder="beneficiary"
-              />
-            </Form.Item>
-          </Col>
-          <Col md={6} sm={12} xs={24}>
-            <Form.Item label={"Address"}>
-              <Input
-                name={"address"}
-                onChange={formik.handleChange}
-                placeholder="address"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Form.Item label={"Description"}>
-          <Input
-            name={"description"}
-            onChange={formik.handleChange}
-            placeholder="description"
-          />
-        </Form.Item>
-      </Form>
+      <Row gutter={12}>
+        <Col md={6} sm={12} xs={24}>
+          <Form.Item
+            required
+            label={"Amount"}
+            help={<FieldError message={formik.errors.amount} />}
+          >
+            <Input
+              name={"amount"}
+              type="number"
+              value={formik.values.amount}
+              onChange={formik.handleChange}
+              placeholder="Amount"
+            />
+          </Form.Item>
+        </Col>
+        <Col md={6} sm={12} xs={24}>
+          <Form.Item
+            required
+            label={"Account"}
+            help={<FieldError message={formik.errors.account} />}
+          >
+            <Input
+              name={"account"}
+              type="number"
+              value={formik.values.account}
+              onChange={formik.handleChange}
+              placeholder="account"
+            />
+          </Form.Item>
+        </Col>
+        <Col md={6} sm={12} xs={24}>
+          <Form.Item
+            required
+            label={"Beneficiary"}
+            help={<FieldError message={formik.errors.beneficiary} />}
+          >
+            <Input
+              name={"beneficiary"}
+              onChange={formik.handleChange}
+              value={formik.values.beneficiary}
+              placeholder="beneficiary"
+            />
+          </Form.Item>
+        </Col>
+        <Col md={6} sm={12} xs={24}>
+          <Form.Item label={"Address"}>
+            <Input
+              name={"address"}
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              placeholder="address"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Form.Item label={"Description"}>
+        <Input
+          name={"description"}
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          placeholder="description"
+        />
+      </Form.Item>
       <Button htmlType="submit">Submit</Button>
     </form>
   );

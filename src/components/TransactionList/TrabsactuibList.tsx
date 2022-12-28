@@ -1,27 +1,36 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import { apiService } from "../../services/Api/ApiService";
-import { Transaction } from "../../types/types";
+import { useGetTransactions } from "../../hooks/useGetTransactions";
+import { Pagination } from "../Pagination/Pagination";
 import { TransactionListItem } from "../TransactionListItem/TransactionListItem";
 
 import "./styles.scss";
 
 export const TransactionList: React.FC = () => {
-  const { transactions, setTransactions } = useContext(AppContext);
+  const {
+    transactions,
+    transactionsPaging,
+    setTransactionsParams,
+    transactionsParams,
+  } = useContext(AppContext);
 
-  useEffect(() => {
-    apiService
-      .getRequest("/transactions?_limit=2&_page=2")
-      .then((res: Response) => {
-        res.json().then((trans: Transaction[]) => setTransactions(trans));
-      });
-  }, []);
+  useGetTransactions();
 
   return (
-    <ul className="transaction-list">
-      {transactions.map((transaction) => (
-        <TransactionListItem key={transaction.id} transaction={transaction} />
-      ))}
-    </ul>
+    <div>
+      <ul className="transaction-list">
+        {transactions.map((transaction) => (
+          <TransactionListItem key={transaction.id} transaction={transaction} />
+        ))}
+      </ul>
+      <Pagination
+        pageSize={transactionsPaging.pageSize}
+        currentPage={transactionsPaging.current}
+        totalCount={transactionsPaging.total}
+        onPageChange={(val) =>
+          setTransactionsParams({ ...transactionsParams, pageNumber: val })
+        }
+      />
+    </div>
   );
 };

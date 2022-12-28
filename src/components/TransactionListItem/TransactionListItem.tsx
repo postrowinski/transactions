@@ -29,15 +29,13 @@ export const TransactionListItem: React.FC<Props> = ({ transaction }) => {
         <div className="transaction-list-item__beneficiary">{beneficiary}</div>
         <div className="transaction-list-item__amount">{amount}</div>
         <div className="transaction-list-item__delete">
-          {amount >= 0 && (
-            <Button
-              danger
-              type="dashed"
-              shape="circle"
-              icon={<DeleteOutlined />}
-              onClick={onDeleteClick}
-            />
-          )}
+          <Button
+            danger
+            type="dashed"
+            shape="circle"
+            icon={<DeleteOutlined />}
+            onClick={onDeleteClick}
+          />
         </div>
       </div>
     </li>

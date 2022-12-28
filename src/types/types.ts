@@ -2,9 +2,13 @@ export type Transaction = {
   id?: number;
   amount: number;
   beneficiary: string;
-  //TODO: add PL at front
-  account: number;
+  account: string;
   address: string;
   date: string;
   description: string;
+};
+
+export type Pageable = {
+  pageNumber?: number;
+  filters?: Record<string, string>;
 };
