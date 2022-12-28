@@ -2,23 +2,42 @@ import _ from "lodash";
 import { Pageable } from "../types/types";
 
 export type ApiService = {
-  getRequest(input: RequestInfo | URL, params?: Pageable): Promise<Response>;
+  getRequest(url: string, params?: Pageable): Promise<Response>;
+  postRequest<T>(url: string, body: T): Promise<Response>;
+  deleteRequest(url: string): Promise<Response>;
   getSearchUrlParams(pageable: Pageable): string;
 };
 
 export const baseUrl = "http://localhost:4000";
 
 export const apiService: ApiService = {
-  async getRequest(
-    input: RequestInfo | URL,
-    params?: Pageable
-  ): Promise<Response> {
-    let url = baseUrl + input;
+  async getRequest(url: string, params?: Pageable): Promise<Response> {
+    let updatedUrl = baseUrl + url;
     if (!_.isNil(params)) {
-      url += `?${apiService.getSearchUrlParams(params)}`;
+      updatedUrl += `?${apiService.getSearchUrlParams(params)}`;
     }
-    const res = await fetch(url);
-    return res;
+    return await fetch(updatedUrl);
+  },
+
+  async postRequest<T>(url: string, body: T): Promise<Response> {
+    const finalUrl = baseUrl + url;
+    const response = await fetch(finalUrl, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    return response;
+  },
+
+  async deleteRequest(url: string): Promise<Response> {
+    const finalUrl = baseUrl + url;
+    const response = await fetch(finalUrl, {
+      method: "DELETE",
+    });
+    return response;
   },
 
   getSearchUrlParams(pageable: Pageable): string {
