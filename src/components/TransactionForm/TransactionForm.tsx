@@ -1,4 +1,4 @@
-import { Button, Input, Form, Row, Col, message } from "antd";
+import { Button, Input, Form, Row, Col, message, ColProps } from "antd";
 import { useFormik } from "formik";
 import React, { useContext } from "react";
 import { Transaction } from "../../types/types";
@@ -7,6 +7,13 @@ import { transactionFormValidationSchema } from "./validationSchema";
 import { format } from "date-fns";
 import { apiService } from "../../services/ApiService";
 import { AppContext } from "../../context/AppContext";
+import { Fieldset } from "../Fieldset/Fieldset";
+
+const columnProps: ColProps = {
+  md: 12,
+  sm: 24,
+  xs: 24,
+};
 
 export const TransactionForm: React.FC = () => {
   const { setTransactionsParams, transactionsParams } = useContext(AppContext);
@@ -45,11 +52,11 @@ export const TransactionForm: React.FC = () => {
   });
 
   return (
-    <>
+    <Fieldset label="New Transaction">
       {contextMessageHolder}
-      <form onSubmit={formik.handleSubmit}>
+      <Form layout="vertical">
         <Row gutter={12}>
-          <Col md={6} sm={12} xs={24}>
+          <Col {...columnProps}>
             <Form.Item
               required
               label={"Amount"}
@@ -64,7 +71,7 @@ export const TransactionForm: React.FC = () => {
               />
             </Form.Item>
           </Col>
-          <Col md={6} sm={12} xs={24}>
+          <Col {...columnProps}>
             <Form.Item
               required
               label={"Account"}
@@ -79,7 +86,7 @@ export const TransactionForm: React.FC = () => {
               />
             </Form.Item>
           </Col>
-          <Col md={6} sm={12} xs={24}>
+          <Col {...columnProps}>
             <Form.Item
               required
               label={"Beneficiary"}
@@ -93,7 +100,7 @@ export const TransactionForm: React.FC = () => {
               />
             </Form.Item>
           </Col>
-          <Col md={6} sm={12} xs={24}>
+          <Col {...columnProps}>
             <Form.Item label={"Address"}>
               <Input
                 name={"address"}
@@ -112,8 +119,12 @@ export const TransactionForm: React.FC = () => {
             placeholder="description"
           />
         </Form.Item>
-        <Button htmlType="submit">Submit</Button>
-      </form>
-    </>
+        <Row justify={"end"}>
+          <Button type="primary" onClick={formik.submitForm}>
+            Submit
+          </Button>
+        </Row>
+      </Form>
+    </Fieldset>
   );
 };

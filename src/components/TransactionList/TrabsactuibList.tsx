@@ -5,7 +5,8 @@ import { AppContext } from "../../context/AppContext";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { apiService } from "../../services/ApiService";
 import { Pagination } from "../Pagination/Pagination";
-import { TransactionListItem } from "../TransactionListItem/TransactionListItem";
+import { TransactionListItem } from "../TransactionListItems/TransactionListItem";
+import { TransactionListTitle } from "../TransactionListItems/TransactionListTitle";
 
 import "./styles.scss";
 
@@ -36,6 +37,7 @@ export const TransactionList: React.FC = () => {
   return (
     <div>
       {contextMessageHolder}
+      <TransactionListTitle />
       <ul className="transaction-list">
         {transactions.map((transaction) => (
           <TransactionListItem

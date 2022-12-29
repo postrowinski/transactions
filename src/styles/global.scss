@@ -5,15 +5,3 @@
 body {
   margin: 0;
 }
-
-.container {
-  width: 1200px;
-  margin: 0 auto;
-}
-
-@media screen and (max-width: 1200px) {
-  .container {
-    width: calc(100% - 30px);
-    margin: 0 15px;
-  }
-}

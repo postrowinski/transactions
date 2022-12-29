@@ -18,17 +18,17 @@ export const TransactionListItem: React.FC<Props> = ({
   const { id, date, amount, beneficiary, description } = transaction;
 
   return (
-    <li className="transaction-list-item">
-      <div className="transaction-list-item__left-side">
-        <div className="transaction-list-item__date">
+    <li className="transaction-list-row">
+      <div className="transaction-list-row__left-side">
+        <div className="transaction-list-row__date">
           {format(new Date(date).valueOf(), "dd-MM-yyyy")}
         </div>
-        <div className="transaction-list-item__description">{description}</div>
+        <div className="transaction-list-row__description">{description}</div>
       </div>
-      <div className="transaction-list-item__right-side">
-        <div className="transaction-list-item__beneficiary">{beneficiary}</div>
-        <div className="transaction-list-item__amount">{amount}</div>
-        <div className="transaction-list-item__delete">
+      <div className="transaction-list-row__right-side">
+        <div className="transaction-list-row__beneficiary">{beneficiary}</div>
+        <div className="transaction-list-row__amount">{amount}</div>
+        <div className="transaction-list-row__delete">
           <Popconfirm
             placement="left"
             title={"Are you sure to delete this transaction?"}

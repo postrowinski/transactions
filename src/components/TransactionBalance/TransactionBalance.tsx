@@ -14,7 +14,7 @@ export const TransactionBalance: React.FC = () => {
     return balance >= 0
       ? "transaction-balance--positive"
       : "transaction-balance--negative";
-  }, [transactions]);
+  }, [balance]);
 
   return (
     <div className={`transaction-balance ${balanceClassColor}`.trim()}>

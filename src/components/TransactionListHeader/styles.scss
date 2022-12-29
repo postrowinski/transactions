@@ -1,6 +1,26 @@
+@import "../../styles/variables";
+
 .transaction-list-header {
+  margin-top: 8px;
+  display: flex;
+  gap: 30px;
+  @media screen and (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: 6px;
+  }
   &__balance-and-filter-side {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex: 1;
+    @media screen and (max-width: $breakpoint-mobile) {
+      order: 1;
+    }
   }
   &__form-side {
+    flex: 1;
+    @media screen and (max-width: $breakpoint-mobile) {
+      order: 0;
+    }
   }
 }

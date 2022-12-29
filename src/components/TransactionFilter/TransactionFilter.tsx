@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Input } from "antd";
 import { AppContext } from "../../context/AppContext";
+import { Fieldset } from "../Fieldset/Fieldset";
 
 export const TransactionFilter: React.FC = () => {
   const { transactionsParams, setTransactionsParams } = useContext(AppContext);
@@ -19,8 +20,8 @@ export const TransactionFilter: React.FC = () => {
   };
 
   return (
-    <div>
+    <Fieldset label="Filter by beneficiary">
       <Input value={inputValue} onChange={onInputChange} />
-    </div>
+    </Fieldset>
   );
 };

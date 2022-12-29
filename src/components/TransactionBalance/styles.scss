@@ -1,6 +1,8 @@
 @import "../../styles/variables";
 
 .transaction-balance {
+  font-size: 28px;
+  font-weight: 700;
   &--negative {
     color: $negative-color;
   }

@@ -1,22 +1,25 @@
 import React from "react";
-import { Layout } from "antd";
+import { ConfigProvider } from "antd";
 import { TransactionList } from "./components/TransactionList/TrabsactuibList";
 import { AppProviderWrapper } from "./context/AppContext";
 import { TransactionListHeader } from "./components/TransactionListHeader/TransactionListHeader";
-
-const { Header, Footer, Content } = Layout;
+import { Layout } from "./components/Layout/Layout";
 
 export const App: React.FC = () => {
   return (
     <AppProviderWrapper>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Header>Header</Header>
-        <Content className="container">
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#BC004F",
+          },
+        }}
+      >
+        <Layout>
           <TransactionListHeader />
           <TransactionList />
-        </Content>
-        <Footer>Footer</Footer>
-      </Layout>
+        </Layout>
+      </ConfigProvider>
     </AppProviderWrapper>
   );
 };

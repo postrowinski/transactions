@@ -1,0 +1,19 @@
+.fieldset {
+  //   border: 1px solid red;
+  border-width: 1px;
+  border-style: solid;
+  margin-bottom: 6px;
+  padding: 4px 20px 12px;
+  border-radius: 12px;
+}
+
+.fieldset__legend {
+  margin-bottom: 14px;
+  padding: 0 6px;
+  font-size: 18px;
+  border-bottom: 0;
+  font-weight: 500;
+  margin-bottom: 0;
+  width: auto;
+  font-style: italic;
+}

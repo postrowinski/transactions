@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+%row {
+  display: flex;
+  width: 100%;
+  padding: 6px 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  @media screen and (max-width: $breakpoint-mobile) {
+    gap: 8px;
+    font-size: 0.75rem;
+  }
+}
+
+.transaction-list-row {
+  @extend %row;
+  list-style-type: none;
+  min-height: 45px;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  &__left-side {
+    display: flex;
+    gap: 12px;
+  }
+  &__right-side {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+  }
+  &__date {
+    min-width: 80px;
+    @media screen and (max-width: $breakpoint-mobile) {
+      min-width: 70px;
+    }
+  }
+  &__description {
+    @media screen and (max-width: $breakpoint-mobile) {
+      display: none;
+    }
+  }
+  &__amount {
+    min-width: 70px;
+    text-align: right;
+    @media screen and (max-width: $breakpoint-mobile) {
+      min-width: 60px;
+    }
+  }
+  &__delete {
+    min-width: 40px;
+  }
+}
+
+.transaction-list-title {
+  @extend %row;
+  color: white;
+}

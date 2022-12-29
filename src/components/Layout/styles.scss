@@ -1,0 +1,19 @@
+$content-width: 1200px;
+
+.app-layout {
+  &__header {
+    font-size: 24px;
+    text-align: center;
+  }
+  &__content {
+    width: $content-width;
+    margin: 0 auto;
+    @media screen and (max-width: $content-width) {
+      width: calc(100% - 30px);
+      margin: 0 15px;
+    }
+  }
+  &__footer {
+    text-align: center;
+  }
+}
