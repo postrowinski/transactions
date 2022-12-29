@@ -1,9 +1,8 @@
 import React from "react";
 import { ConfigProvider } from "antd";
-import { TransactionList } from "./components/TransactionList/TrabsactuibList";
 import { AppProviderWrapper } from "./context/AppContext";
-import { TransactionListHeader } from "./components/TransactionListHeader/TransactionListHeader";
 import { Layout } from "./components/Layout/Layout";
+import { HomePage } from "./pages/Home/HomePage";
 
 export const App: React.FC = () => {
   return (
@@ -16,8 +15,7 @@ export const App: React.FC = () => {
         }}
       >
         <Layout>
-          <TransactionListHeader />
-          <TransactionList />
+          <HomePage />
         </Layout>
       </ConfigProvider>
     </AppProviderWrapper>
