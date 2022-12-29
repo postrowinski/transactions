@@ -21,7 +21,7 @@ export const parserService: ParserService = {
       const searchParams = new URL(thisHeaderUrl).searchParams;
       const page = searchParams.get("_page");
       const limit = searchParams.get("_limit");
-      return [thisHeaderRel, { url: thisHeaderUrl, page, limit }];
+      return [thisHeaderRel, { page, limit }];
     });
     return Object.fromEntries(linkHeadersMap);
   },
